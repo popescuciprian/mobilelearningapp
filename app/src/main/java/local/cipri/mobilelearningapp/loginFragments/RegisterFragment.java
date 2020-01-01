@@ -84,7 +84,7 @@ public class RegisterFragment extends Fragment {
 
     private boolean validateCredentials(String email, String pass, String confirm) {
         if (LoginFragment.validateCredentials(email, pass))
-            return true;
+            return pass.equals(confirm);
         return false;
     }
 
