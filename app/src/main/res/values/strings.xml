@@ -1,0 +1,18 @@
+<resources>
+    <string name="main_nav_home_title"></string>
+    <string name="app_name">MobileLearningApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Mobile Learning Application</string>
+    <string name="nav_header_subtitle">Popescu Stefan-Ciprian, 1082</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="string_next_quizz">next</string>
+    <string name="string_register_btnRegisterPage">register</string>
+    <string name="string_login_btn">Login</string>
+    <string name="string_register_btn">Register</string>
+    <string name="string_TODO">//TODO - ecran raport, pentru partea a 2-a a proiectului :)</string>
+
+</resources>
