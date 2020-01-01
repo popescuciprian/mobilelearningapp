@@ -15,4 +15,13 @@
     <string name="string_register_btn">Register</string>
     <string name="string_TODO">//TODO - ecran raport, pentru partea a 2-a a proiectului :)</string>
 
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_pass_verify">Confirm</string>
+    <string name="error_login">Credentiale invalide!</string>
+    <string name="error_register">Incearca alt email!</string>
+    <string name="success_login">Autentificare reusita!</string>
+    <string name="success_register">Inregistrare reusita!</string>
+    <string name="error_register_default">Inregistrare esuata!</string>
+
 </resources>

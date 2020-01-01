@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "960061019500",
+    "firebase_url": "https://mobilelearningapp-260520.firebaseio.com",
+    "project_id": "mobilelearningapp-260520",
+    "storage_bucket": "mobilelearningapp-260520.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960061019500:android:2f088850233f4aaf848f49",
+        "android_client_info": {
+          "package_name": "local.cipri.mobilelearningapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "960061019500-vle3q6abb24bkpapgig775o318a24reb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "local.cipri.mobilelearningapp",
+            "certificate_hash": "7f3ef41d08cf5450c1d71c261c94dd1c0bbf7b6f"
+          }
+        },
+        {
+          "client_id": "960061019500-t7oh5evi3f544p8fltoo28ui2d341q40.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0M3hvE3izKAbDO2xNJxlMAMi8-BgwNYQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "960061019500-t7oh5evi3f544p8fltoo28ui2d341q40.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

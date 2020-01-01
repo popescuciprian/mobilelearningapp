@@ -11,28 +11,16 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/etUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="name"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <EditText
             android:id="@+id/etNewEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="email"
             android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etUserName"
-            app:layout_constraintBottom_toTopOf="@id/etNewPassword"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/etNewPassword"
@@ -66,6 +54,36 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etNewPasswordConfirm" />
+
+        <TextView
+            android:id="@+id/labelEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_email"
+            app:layout_constraintBottom_toBottomOf="@+id/etNewEmail"
+            app:layout_constraintEnd_toStartOf="@+id/etNewEmail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/etNewEmail" />
+
+        <TextView
+            android:id="@+id/labelPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_password"
+            app:layout_constraintBottom_toBottomOf="@+id/etNewPassword"
+            app:layout_constraintEnd_toStartOf="@+id/etNewPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etNewEmail" />
+
+        <TextView
+            android:id="@+id/labelPasswordVeridy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_pass_verify"
+            app:layout_constraintBottom_toBottomOf="@+id/etNewPasswordConfirm"
+            app:layout_constraintEnd_toStartOf="@+id/etNewPasswordConfirm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etNewPassword" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
