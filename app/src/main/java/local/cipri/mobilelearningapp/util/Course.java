@@ -3,19 +3,52 @@ package local.cipri.mobilelearningapp.util;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+@Entity(tableName = "courses")
 public class Course implements Parcelable {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    private long id;
+    @ColumnInfo(name = "title")
     private String title;
+    @ColumnInfo(name = "author")
     private String author;
+    @ColumnInfo(name = "date")
     private Date date;
+    @ColumnInfo(name = "description")
     private String description;
+    @ColumnInfo(name = "htmlContent")
     private String htmlContent;
     private CourseQuizz courseQuizz;
 
+    public Course(long id, String title, String author, Date date, String description, String htmlContent, CourseQuizz courseQuizz) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.date = date;
+        this.description = description;
+        this.htmlContent = htmlContent;
+        this.courseQuizz = courseQuizz;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @Ignore
     public Course(String title, String author, Date date, String description, String htmlContent, CourseQuizz courseQuizz) {
         this.title = title;
         this.author = author;
@@ -45,7 +78,7 @@ public class Course implements Parcelable {
         return date;
     }
 
-    public String getDateToString(){
+    public String getDateToString() {
         return new SimpleDateFormat("dd-MM-yyyy", Locale.US).format(date);
     }
 
@@ -79,8 +112,8 @@ public class Course implements Parcelable {
 
     @Override
     public String toString() {
-        String courseQuizzesStr="null";
-        if(courseQuizz!=null)courseQuizzesStr=courseQuizz.toString();
+        String courseQuizzesStr = "null";
+        if (courseQuizz != null) courseQuizzesStr = courseQuizz.toString();
         String result = "Course{" +
                 "title='" + title + '\'' +
                 ", author='" + author + '\'' +
