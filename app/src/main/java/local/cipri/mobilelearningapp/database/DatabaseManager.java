@@ -7,6 +7,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import local.cipri.mobilelearningapp.database.dao.CourseDao;
+import local.cipri.mobilelearningapp.database.dao.CourseQuizzDao;
+import local.cipri.mobilelearningapp.database.dao.QuizzDao;
 import local.cipri.mobilelearningapp.util.Course;
 import local.cipri.mobilelearningapp.util.CourseQuizz;
 import local.cipri.mobilelearningapp.util.Quizz;

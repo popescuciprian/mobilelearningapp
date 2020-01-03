@@ -1,6 +1,8 @@
 package local.cipri.mobilelearningapp.coursesFragments;
 
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -24,6 +26,7 @@ import java.util.List;
 import local.cipri.mobilelearningapp.CoursesAndQuizzes;
 import local.cipri.mobilelearningapp.MainActivity;
 import local.cipri.mobilelearningapp.R;
+import local.cipri.mobilelearningapp.database.service.CourseService;
 import local.cipri.mobilelearningapp.network.CourseParser;
 import local.cipri.mobilelearningapp.network.DownloadCoursesTask;
 import local.cipri.mobilelearningapp.util.Course;
@@ -49,19 +52,22 @@ public class CoursesFragment extends Fragment {
 
     private void initListView(View view) {
         lvCourses = view.findViewById(R.id.lv_courses);
+        readCoursesFromDb(getContext());
         downloadCourses();
         CourseAdapter adapter = new CourseAdapter(getContext(), R.layout.rl_course_item, courses, getLayoutInflater());
         lvCourses.setAdapter(adapter);
         lvCourses.setOnItemClickListener(lvCoursesItemSelected());
     }
 
+    @SuppressLint("StaticFieldLeak")
     private void downloadCourses() {
         try {
             new DownloadCoursesTask() {
                 @Override
                 protected void onPostExecute(String s) {
                     courses = CourseParser.parseJson(s);
-                    getArguments().putParcelableArrayList(COURSES_KEY,(ArrayList)courses);
+                    insertCoursesToDb(courses, getContext());
+                    getArguments().putParcelableArrayList(COURSES_KEY, (ArrayList) courses);
                     Toast.makeText(getActivity().getApplicationContext(), "Download Complete!", Toast.LENGTH_SHORT).show();
                     if (getContext() != null) {
                         CourseAdapter adapter = new CourseAdapter(getContext(), R.layout.rl_course_item, courses, getLayoutInflater());
@@ -75,19 +81,44 @@ public class CoursesFragment extends Fragment {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
+    private void insertCoursesToDb(List<Course> courses, Context context) {
+        List<Course> dbCourses = new ArrayList<Course>();
+        if (courses != null) {
+            for (Course course : courses)
+                new CourseService.insertCourse(context) {
+                    @Override
+                    protected void onPostExecute(Course course) {
+                        dbCourses.add(course);
+                    }
+                }.execute(course);
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void readCoursesFromDb(Context context) {
+        new CourseService.getCourses(context) {
+            @Override
+            protected void onPostExecute(List<Course> dbCourses) {
+                List<Course> lst = new ArrayList<Course>();
+                lst.addAll(dbCourses);
+            }
+        }.execute();
+    }
+
     private AdapterView.OnItemClickListener lvCoursesItemSelected() {
         return new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Fragment courseViewerFragment = new CourseViewerFragment();
-                getArguments().putString(HTML_COURSE_KEY,((Course)getArguments().getParcelableArrayList(COURSES_KEY).get(position)).getHtmlContent());
+                getArguments().putString(HTML_COURSE_KEY, ((Course) getArguments().getParcelableArrayList(COURSES_KEY).get(position)).getHtmlContent());
                 courseViewerFragment.setArguments(getArguments());
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.courses_frame_container, courseViewerFragment)
                         .commit();
-                Intent intent = getActivity().getIntent().putParcelableArrayListExtra(COURSES_KEY,(ArrayList<? extends Parcelable>) courses);
-                getActivity().setResult(getActivity().RESULT_OK,intent);
+                Intent intent = getActivity().getIntent().putParcelableArrayListExtra(COURSES_KEY, (ArrayList<? extends Parcelable>) courses);
+                getActivity().setResult(getActivity().RESULT_OK, intent);
 //                getActivity().finish();
             }
         };

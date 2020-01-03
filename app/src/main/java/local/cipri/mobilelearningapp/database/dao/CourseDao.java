@@ -1,4 +1,4 @@
-package local.cipri.mobilelearningapp.database;
+package local.cipri.mobilelearningapp.database.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
