@@ -28,16 +28,16 @@ public class Course implements Parcelable {
     private String description;
     @ColumnInfo(name = "htmlContent")
     private String htmlContent;
+    @Ignore
     private CourseQuizz courseQuizz;
 
-    public Course(long id, String title, String author, Date date, String description, String htmlContent, CourseQuizz courseQuizz) {
+    public Course(long id, String title, String author, Date date, String description, String htmlContent) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.date = date;
         this.description = description;
         this.htmlContent = htmlContent;
-        this.courseQuizz = courseQuizz;
     }
 
     public long getId() {

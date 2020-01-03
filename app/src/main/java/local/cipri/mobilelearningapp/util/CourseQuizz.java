@@ -6,21 +6,32 @@ import android.os.Parcelable;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.util.Arrays;
 
-@Entity
+@Entity(tableName = "coursequizzes", foreignKeys = @ForeignKey(entity = Course.class, parentColumns = "id", childColumns = "courseId", onDelete = ForeignKey.CASCADE), indices = {@Index("courseId")})
 public class CourseQuizz implements Parcelable {
     @PrimaryKey
     @ColumnInfo(name = "id")
     private long id;
+    @Ignore
     private Quizz[] quizzes;
     @ColumnInfo(name = "description")
     private String description;
     @ColumnInfo(name = "courseId")
     private long courseId;
+
+    public long getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(long courseId) {
+        this.courseId = courseId;
+    }
 
     public long getId() {
         return id;
@@ -30,9 +41,8 @@ public class CourseQuizz implements Parcelable {
         this.id = id;
     }
 
-    public CourseQuizz(long id, Quizz[] quizzes, String description, long courseId) {
+    public CourseQuizz(long id, String description, long courseId) {
         this.id = id;
-        this.quizzes = quizzes;
         this.description = description;
         this.courseId = courseId;
     }

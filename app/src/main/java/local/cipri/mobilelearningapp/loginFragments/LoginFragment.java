@@ -45,7 +45,15 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         initForm(view);
+        debugLogin();
         return view;
+    }
+
+    private void debugLogin() {
+        //todo: remove before sending, debug purpose only.
+        etEmail.setText("debug@mla.com");
+        etPassword.setText("123456");
+        btnLogin.performClick();
     }
 
     private void initForm(View view) {
@@ -72,7 +80,7 @@ public class LoginFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 firebaseUser = firebaseAuth.getCurrentUser();
                                 Toast.makeText(getContext(), R.string.success_login, Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(getContext(),MainActivity.class);
+                                Intent intent = new Intent(getContext(), MainActivity.class);
                                 intent.putExtra(LOGGED_USER, firebaseUser);
                                 startActivity(intent);
                             } else {
