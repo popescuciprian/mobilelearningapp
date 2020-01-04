@@ -21,7 +21,7 @@ public class CourseQuizzAdapter extends ArrayAdapter<CourseQuizz> {
     private LayoutInflater layoutInflater;
 
     public CourseQuizzAdapter(@NonNull Context context, int resource, List<CourseQuizz> quizzes, LayoutInflater layoutInflater) {
-        super(context, resource,quizzes);
+        super(context, resource, quizzes);
         this.context = context;
         this.resource = resource;
         this.quizzes = quizzes;
@@ -33,15 +33,17 @@ public class CourseQuizzAdapter extends ArrayAdapter<CourseQuizz> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = layoutInflater.inflate(resource, parent, false);
         CourseQuizz courseQuizz = quizzes.get(position);
-        if(courseQuizz !=null){
+        if (courseQuizz != null) {
             populateRow(view, courseQuizz);
         }
         return view;
     }
+
     private void populateRow(View view, CourseQuizz courseQuizz) {
         populateRowItem((TextView) view.findViewById(R.id.tv_quizz_desc), courseQuizz.getDescription());
         populateRowItem((TextView) view.findViewById(R.id.tv_quizz_nr_questions), String.valueOf(courseQuizz.getQuizzes().length));
     }
+
     private void populateRowItem(TextView textView, String value) {
         if (value != null)
             textView.setText(value);

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import local.cipri.mobilelearningapp.coursesFragments.CourseViewerFragment;
@@ -29,8 +31,7 @@ import local.cipri.mobilelearningapp.util.CourseQuizz;
 import local.cipri.mobilelearningapp.util.Quizz;
 
 public class CoursesAndQuizzes extends AppCompatActivity {
-    //public static final String COURSES_SOURCE = "https://api.myjson.com/bins/ymgmu";  //old source
-    public static final String COURSES_SOURCE = "https://api.myjson.com/bins/13dpos";
+    public static final String COURSES_SOURCE = "https://api.myjson.com/bins/17r9r8";
     private Bundle bundle;
 
     private List<Course> dbCourses = null;
@@ -41,7 +42,7 @@ public class CoursesAndQuizzes extends AppCompatActivity {
         setContentView(R.layout.activity_courses_and_quizzes);
         readCoursesFromDb();
     }
-
+    
     @SuppressLint("StaticFieldLeak")
     private void readCoursesFromDb() {
         new CourseService.getCourses(getApplicationContext()) {
@@ -78,6 +79,26 @@ public class CoursesAndQuizzes extends AppCompatActivity {
                 }
             }
         }.execute();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    public static void insertCoursesToDb(List<Course> courses, Context context) {
+        if (courses != null) {
+            for (Course course : courses)
+                new CourseService.insertCourse(context) {
+                    @Override
+                    protected void onPostExecute(Course course) {
+                        new CourseQuizzService.insertCourseQuizz(context) {
+                            @Override
+                            protected void onPostExecute(CourseQuizz courseQuizz) {
+                                for (Quizz quizz : courseQuizz.getQuizzes())
+                                    new QuizzService.insertQuizz(context)
+                                            .execute(quizz);
+                            }
+                        }.execute(course.getCourseQuizz());
+                    }
+                }.execute(course);
+        }
     }
 
     private void initFragment(int reqCode) {

@@ -52,7 +52,8 @@ public class QuizzesFragment extends Fragment {
         lvQuizzes = view.findViewById(R.id.lv_quizzes);
         if (getArguments().get("dbQuizzes") == null)
             downloadQuizzes();
-        else courseQuizzes = getArguments().getParcelableArrayList("dbQuizzes");
+        else
+            courseQuizzes = getArguments().getParcelableArrayList("dbQuizzes");
         CourseQuizzAdapter adapter = new CourseQuizzAdapter(getContext(), R.layout.rl_quizz_item, courseQuizzes, getLayoutInflater());
         lvQuizzes.setAdapter(adapter);
         lvQuizzes.setOnItemClickListener(lvQuizzesItemSelected());
@@ -65,6 +66,7 @@ public class QuizzesFragment extends Fragment {
                 @Override
                 protected void onPostExecute(String s) {
                     List<Course> courses = CourseParser.parseJson(s);
+                    CoursesAndQuizzes.insertCoursesToDb(courses,getContext());
                     for (Course c : courses) courseQuizzes.add(c.getCourseQuizz());
                     getArguments().putParcelableArrayList(QUIZZES_KEY, (ArrayList) courseQuizzes);
                     Toast.makeText(getActivity().getApplicationContext(), "Download Complete!", Toast.LENGTH_SHORT).show();
@@ -93,7 +95,6 @@ public class QuizzesFragment extends Fragment {
                         .commit();
                 Intent intent = getActivity().getIntent().putExtra(QUIZZ_CHOOSEN, courseQuizzes.get(position).getDescription());
                 getActivity().setResult(getActivity().RESULT_OK, intent);
-//                getActivity().finish();
             }
         };
     }

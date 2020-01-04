@@ -24,6 +24,20 @@ public class CourseService {
         }
     }
 
+    public static class getCoursesAfterDate extends AsyncTask<Void, Void, List<Course>> {
+        long timestamp;
+
+        @Override
+        protected List<Course> doInBackground(Void... voids) {
+            return courseDao.selectAllAfterDate(timestamp);
+        }
+
+        public getCoursesAfterDate(Context context, long timestamp) {
+            courseDao = DatabaseManager.getInstance(context).getCourseDao();
+            this.timestamp = timestamp;
+        }
+    }
+
     public static class insertCourse extends AsyncTask<Course, Void, Course> {
 
         @Override

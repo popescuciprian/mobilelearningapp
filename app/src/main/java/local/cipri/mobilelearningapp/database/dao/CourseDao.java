@@ -14,10 +14,16 @@ import local.cipri.mobilelearningapp.util.Course;
 public interface CourseDao {
     @Query("select * from courses")
     List<Course> selectAll();
+
+    @Query("select * from courses where date >:timestamp")
+    List<Course> selectAllAfterDate(long timestamp);
+
     @Insert
     long insert(Course course);
+
     @Update
     int update(Course course);
+
     @Delete
     int delete(Course course);
 

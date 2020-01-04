@@ -74,7 +74,7 @@ public class CoursesFragment extends Fragment {
                 @Override
                 protected void onPostExecute(String s) {
                     courses = CourseParser.parseJson(s);
-                    insertCoursesToDb(courses, getContext());
+                    CoursesAndQuizzes.insertCoursesToDb(courses, getContext());
                     getArguments().putParcelableArrayList(COURSES_KEY, (ArrayList) courses);
                     Toast.makeText(getActivity().getApplicationContext(), "Download Complete!", Toast.LENGTH_SHORT).show();
                     if (getContext() != null) {
@@ -89,25 +89,6 @@ public class CoursesFragment extends Fragment {
         }
     }
 
-    @SuppressLint("StaticFieldLeak")
-    private void insertCoursesToDb(List<Course> courses, Context context) {
-        if (courses != null) {
-            for (Course course : courses)
-                new CourseService.insertCourse(context) {
-                    @Override
-                    protected void onPostExecute(Course course) {
-                        new CourseQuizzService.insertCourseQuizz(context) {
-                            @Override
-                            protected void onPostExecute(CourseQuizz courseQuizz) {
-                                for (Quizz quizz : courseQuizz.getQuizzes())
-                                    new QuizzService.insertQuizz(context)
-                                            .execute(quizz);
-                            }
-                        }.execute(course.getCourseQuizz());
-                    }
-                }.execute(course);
-        }
-    }
 
     @SuppressLint("StaticFieldLeak")
     private void readCoursesFromDb(Context context) {

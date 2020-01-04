@@ -22,7 +22,7 @@ public class Converters {
     @TypeConverter
     public static String[] fromDbToQuizz(String choices) {
         return choices != null ?
-                choices.replaceAll("[^a-zA-Z^,\\s]", "").split(", ") : null;
+                choices.replaceAll("[^a-zA-Z0-9:^,\\s]", "").split(", ") : null;
     }
 
     @TypeConverter

@@ -31,7 +31,6 @@ public class QuizzScoreFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         intent.putExtra(QuizViewer.SCORE_KEY, tvScore.getText());
         getActivity().setResult(getActivity().RESULT_OK, intent);
-        //getActivity().finish();
 
         return view;
     }
