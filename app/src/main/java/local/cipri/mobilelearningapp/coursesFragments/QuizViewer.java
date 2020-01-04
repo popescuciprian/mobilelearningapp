@@ -27,7 +27,7 @@ public class QuizViewer extends Fragment {
 
     private static final String CURRENT_QUIZZ = "currQuizz";
     public static final String SCORE_KEY = "scoreKey";
-    private static int QUIZZ_INDEX = 0;
+    private static int QUIZZ_INDEX = -1;
     private TextView question;
     private RadioGroup radioGroup;
     private RadioButton radioButton1;
@@ -44,6 +44,7 @@ public class QuizViewer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quiz_viewer, container, false);
+        courseQuizz = getArguments().getParcelable(QuizzesFragment.QUIZZES_KEY);
         initComponents(view);
         if (getArguments().getParcelable(CURRENT_QUIZZ) != null) {
             Quizz quizz = getArguments().getParcelable(CURRENT_QUIZZ);
@@ -51,7 +52,6 @@ public class QuizViewer extends Fragment {
 
             return view;
         }
-        courseQuizz = getArguments().getParcelable(QuizzesFragment.QUIZZES_KEY);
         nextBtn.performClick();
         return view;
     }
@@ -65,21 +65,24 @@ public class QuizViewer extends Fragment {
         radioButton3 = view.findViewById(R.id.radioButton3);
         nextBtn = view.findViewById(R.id.button_next_quizz);
         nextBtn.setOnClickListener(new View.OnClickListener() {
+            private int score = 0;
+
             @Override
             public void onClick(View v) {
-                if (QUIZZ_INDEX == courseQuizz.getQuizzes().length) {
-                    int score = courseQuizz.getQuizzes().length;
-                    getArguments().putInt(SCORE_KEY, score);
+                if (QUIZZ_INDEX >= 0)
+                    validateAnswer();
+                if (QUIZZ_INDEX+1 == courseQuizz.getQuizzes().length) {
                     Fragment quizzScoreFragment = new QuizzScoreFragment();
                     quizzScoreFragment.setArguments(getArguments());
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.courses_frame_container, quizzScoreFragment)
                             .commit();
-                    QUIZZ_INDEX = 0;
+                    QUIZZ_INDEX = -1;
                 } else {
                     Fragment quizViewer = new QuizViewer();
-                    getArguments().putParcelable(CURRENT_QUIZZ, courseQuizz.getQuizzes()[QUIZZ_INDEX++]);
+                    if (QUIZZ_INDEX + 1 < courseQuizz.getQuizzes().length)
+                        getArguments().putParcelable(CURRENT_QUIZZ, courseQuizz.getQuizzes()[++QUIZZ_INDEX]);
                     quizViewer.setArguments(getArguments());
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
@@ -87,6 +90,28 @@ public class QuizViewer extends Fragment {
                             .commit();
                 }
             }
+
+            private void validateAnswer() {
+                if (QUIZZ_INDEX < courseQuizz.getQuizzes().length) {
+                    int answerIndex = courseQuizz.getQuizzes()[QUIZZ_INDEX].getAnswerIndex();
+                    if (answerIndex == getIndexOfCheckedRadioButton()) {
+                        score = getArguments().getInt(SCORE_KEY);
+                        score++;
+                        getArguments().putInt(SCORE_KEY, score);
+                    }
+                }
+            }
+
+            private int getIndexOfCheckedRadioButton() {
+                if (radioButton1.isChecked())
+                    return 0;
+                if (radioButton2.isChecked())
+                    return 1;
+                if (radioButton3.isChecked())
+                    return 2;
+                return -1;
+            }
+
         });
     }
 
