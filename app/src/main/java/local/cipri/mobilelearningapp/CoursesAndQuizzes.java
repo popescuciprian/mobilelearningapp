@@ -29,7 +29,8 @@ import local.cipri.mobilelearningapp.util.CourseQuizz;
 import local.cipri.mobilelearningapp.util.Quizz;
 
 public class CoursesAndQuizzes extends AppCompatActivity {
-    public static final String COURSES_SOURCE = "https://api.myjson.com/bins/ymgmu";
+    //public static final String COURSES_SOURCE = "https://api.myjson.com/bins/ymgmu";  //old source
+    public static final String COURSES_SOURCE = "https://api.myjson.com/bins/13dpos";
     private Bundle bundle;
 
     private List<Course> dbCourses = null;

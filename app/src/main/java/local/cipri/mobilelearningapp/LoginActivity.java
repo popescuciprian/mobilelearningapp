@@ -7,7 +7,6 @@ import android.os.Bundle;
 import local.cipri.mobilelearningapp.loginFragments.LoginFragment;
 
 public class LoginActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
