@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 @Entity(tableName = "coursequizzes", foreignKeys = @ForeignKey(entity = Course.class, parentColumns = "id", childColumns = "courseId", onDelete = ForeignKey.CASCADE), indices = {@Index("courseId")})
 public class CourseQuizz implements Parcelable {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private long id;
     @Ignore

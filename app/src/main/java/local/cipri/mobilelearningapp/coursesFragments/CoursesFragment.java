@@ -26,11 +26,15 @@ import java.util.List;
 import local.cipri.mobilelearningapp.CoursesAndQuizzes;
 import local.cipri.mobilelearningapp.MainActivity;
 import local.cipri.mobilelearningapp.R;
+import local.cipri.mobilelearningapp.database.service.CourseQuizzService;
 import local.cipri.mobilelearningapp.database.service.CourseService;
+import local.cipri.mobilelearningapp.database.service.QuizzService;
 import local.cipri.mobilelearningapp.network.CourseParser;
 import local.cipri.mobilelearningapp.network.DownloadCoursesTask;
 import local.cipri.mobilelearningapp.util.Course;
 import local.cipri.mobilelearningapp.util.CourseAdapter;
+import local.cipri.mobilelearningapp.util.CourseQuizz;
+import local.cipri.mobilelearningapp.util.Quizz;
 
 
 public class CoursesFragment extends Fragment {
@@ -52,8 +56,12 @@ public class CoursesFragment extends Fragment {
 
     private void initListView(View view) {
         lvCourses = view.findViewById(R.id.lv_courses);
-        readCoursesFromDb(getContext());
-        downloadCourses();
+        if (getArguments().get("dbCourses") == null)
+            downloadCourses();
+        else {
+            courses = getArguments().getParcelableArrayList("dbCourses");
+            getArguments().putParcelableArrayList(COURSES_KEY, (ArrayList) courses);
+        }
         CourseAdapter adapter = new CourseAdapter(getContext(), R.layout.rl_course_item, courses, getLayoutInflater());
         lvCourses.setAdapter(adapter);
         lvCourses.setOnItemClickListener(lvCoursesItemSelected());
@@ -83,13 +91,19 @@ public class CoursesFragment extends Fragment {
 
     @SuppressLint("StaticFieldLeak")
     private void insertCoursesToDb(List<Course> courses, Context context) {
-        List<Course> dbCourses = new ArrayList<Course>();
         if (courses != null) {
             for (Course course : courses)
                 new CourseService.insertCourse(context) {
                     @Override
                     protected void onPostExecute(Course course) {
-                        dbCourses.add(course);
+                        new CourseQuizzService.insertCourseQuizz(context) {
+                            @Override
+                            protected void onPostExecute(CourseQuizz courseQuizz) {
+                                for (Quizz quizz : courseQuizz.getQuizzes())
+                                    new QuizzService.insertQuizz(context)
+                                            .execute(quizz);
+                            }
+                        }.execute(course.getCourseQuizz());
                     }
                 }.execute(course);
         }

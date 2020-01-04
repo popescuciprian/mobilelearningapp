@@ -1,6 +1,7 @@
 package local.cipri.mobilelearningapp.coursesFragments;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -42,27 +43,30 @@ public class QuizzesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=  inflater.inflate(R.layout.fragment_quizzes, container, false);
+        View view = inflater.inflate(R.layout.fragment_quizzes, container, false);
         initListView(view);
         return view;
     }
 
-    private void initListView(View view){
+    private void initListView(View view) {
         lvQuizzes = view.findViewById(R.id.lv_quizzes);
-        downloadQuizzes();
+        if (getArguments().get("dbQuizzes") == null)
+            downloadQuizzes();
+        else courseQuizzes = getArguments().getParcelableArrayList("dbQuizzes");
         CourseQuizzAdapter adapter = new CourseQuizzAdapter(getContext(), R.layout.rl_quizz_item, courseQuizzes, getLayoutInflater());
         lvQuizzes.setAdapter(adapter);
         lvQuizzes.setOnItemClickListener(lvQuizzesItemSelected());
     }
 
-    private void downloadQuizzes(){
+    @SuppressLint("StaticFieldLeak")
+    private void downloadQuizzes() {
         try {
             new DownloadCoursesTask() {
                 @Override
                 protected void onPostExecute(String s) {
                     List<Course> courses = CourseParser.parseJson(s);
-                    for(Course c : courses)courseQuizzes.add(c.getCourseQuizz());
-                    getArguments().putParcelableArrayList(QUIZZES_KEY,(ArrayList)courseQuizzes);
+                    for (Course c : courses) courseQuizzes.add(c.getCourseQuizz());
+                    getArguments().putParcelableArrayList(QUIZZES_KEY, (ArrayList) courseQuizzes);
                     Toast.makeText(getActivity().getApplicationContext(), "Download Complete!", Toast.LENGTH_SHORT).show();
                     if (getContext() != null) {
                         CourseQuizzAdapter adapter = new CourseQuizzAdapter(getContext(), R.layout.rl_quizz_item, courseQuizzes, getLayoutInflater());
@@ -81,14 +85,14 @@ public class QuizzesFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Fragment quizViewer = new QuizViewer();
-                getArguments().putParcelable(QUIZZES_KEY,courseQuizzes.get(position));
+                getArguments().putParcelable(QUIZZES_KEY, courseQuizzes.get(position));
                 quizViewer.setArguments(getArguments());
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.courses_frame_container, quizViewer)
                         .commit();
-                Intent intent = getActivity().getIntent().putExtra(QUIZZ_CHOOSEN,courseQuizzes.get(position).getDescription());
-                getActivity().setResult(getActivity().RESULT_OK,intent);
+                Intent intent = getActivity().getIntent().putExtra(QUIZZ_CHOOSEN, courseQuizzes.get(position).getDescription());
+                getActivity().setResult(getActivity().RESULT_OK, intent);
 //                getActivity().finish();
             }
         };

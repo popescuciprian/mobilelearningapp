@@ -14,7 +14,7 @@ import local.cipri.mobilelearningapp.util.Course;
 import local.cipri.mobilelearningapp.util.CourseQuizz;
 import local.cipri.mobilelearningapp.util.Quizz;
 
-@Database(entities = {Course.class, CourseQuizz.class, Quizz.class}, exportSchema = false, version = 1)
+@Database(entities = {Course.class, CourseQuizz.class, Quizz.class}, exportSchema = false, version = 2)
 @TypeConverters({Converters.class})
 public abstract class DatabaseManager extends RoomDatabase {
     private static final String DB_NAME = "mla_db";//MobileLearningApp

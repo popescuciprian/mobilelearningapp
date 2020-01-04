@@ -34,6 +34,7 @@ public class CourseService {
             long id = courseDao.insert(course);
             if (id != -1) {
                 course.setId(id);
+                course.getCourseQuizz().setCourseId(id);
                 return course;
             }
             return null;

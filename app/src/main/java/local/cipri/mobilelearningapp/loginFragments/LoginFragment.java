@@ -53,7 +53,7 @@ public class LoginFragment extends Fragment {
         //todo: remove before sending, debug purpose only.
         etEmail.setText("debug@mla.com");
         etPassword.setText("123456");
-        btnLogin.performClick();
+//        btnLogin.performClick();
     }
 
     private void initForm(View view) {

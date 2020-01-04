@@ -3,11 +3,13 @@ package local.cipri.mobilelearningapp.database.service;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import java.util.Arrays;
 import java.util.List;
 
 import local.cipri.mobilelearningapp.database.DatabaseManager;
 import local.cipri.mobilelearningapp.database.dao.CourseQuizzDao;
 import local.cipri.mobilelearningapp.util.CourseQuizz;
+import local.cipri.mobilelearningapp.util.Quizz;
 
 public class CourseQuizzService {
     private static CourseQuizzDao courseQuizzDao;
@@ -47,6 +49,9 @@ public class CourseQuizzService {
             long id = courseQuizzDao.insert(courseQuizz);
             if (id != -1) {
                 courseQuizz.setId(id);
+                for(Quizz q : courseQuizz.getQuizzes()){
+                    q.setQuizzId(id);
+                }
                 return courseQuizz;
             }
             return null;

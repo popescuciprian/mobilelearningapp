@@ -45,7 +45,6 @@ import local.cipri.mobilelearningapp.util.CourseQuizz;
 import local.cipri.mobilelearningapp.util.Quizz;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String COURSES_SOURCE="https://api.myjson.com/bins/wk1me";
     public static final String REQUIEST_KEY="reqCode";
     public static final int COURSES_REQUEST_CODE = 100;
     public static final int QUIZZES_REQUEST_CODE = 200;
