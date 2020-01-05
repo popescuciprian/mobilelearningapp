@@ -32,5 +32,9 @@
     <string name="teste_de_verificare">Teste de verificare</string>
     <string name="cursuri">Cursuri</string>
     <string name="auto_login_toast">Logare automata!</string>
+    <string name="salvare_rap_label">Salveaza raportul generat</string>
+    <string name="err_generare_raport">Trebuie intai sa generezi un raport!</string>
+    <string name="err_generare_Raport_Txt">Eroare generare raport txt!</string>
+    <string name="succes_generare_rap_curs">Raport cursuri generat cu succes!!</string>
 
 </resources>

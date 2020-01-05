@@ -40,6 +40,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
@@ -78,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvDate;
     private Switch aSwitch;
 
+    List<Object> objectCourses;
+
     private SharedPreferences preferences;
     private final String SWITCH_PREF = "switch_pref";
 
@@ -89,12 +94,8 @@ public class MainActivity extends AppCompatActivity {
         initListViews();
         initButton();
         configNavigation();
-        setPreferences();
     }
 
-    private void setPreferences() {
-
-    }
 
     @SuppressLint("StaticFieldLeak")
     private void initButton() {
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     new CourseService.getCoursesAfterDate(getApplicationContext(), timestamp) {
                         @Override
                         protected void onPostExecute(List<Course> courses) {
-                            List<Object> objectCourses = new ArrayList<>();
+                            objectCourses = new ArrayList<>();
                             if (courses != null && courses.size() > 0) {
                                 objectCourses.addAll(courses);
                                 for (Object course : objectCourses)
@@ -218,15 +219,63 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), CoursesAndQuizzes.class);
                     intent.putExtra(REQUIEST_KEY, QUIZZES_REQUEST_CODE);
                     startActivityForResult(intent, QUIZZES_REQUEST_CODE);
+                } else if (item.getItemId() == R.id.main_nav_save_rap) {
+                    performSaveAsTxt();
                 }
-//                else if (item.getItemId() == R.id.app_bar_switch) {
-//                    initSwitch();
-//                    return false;
-//                }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
+
+            private void performSaveAsTxt() {
+                if (objectCourses != null && objectCourses.size()>0) {
+                    File fileFolder = new File(MainActivity.this.getFilesDir(), "rapoarte");
+                    if (!fileFolder.exists())
+                        fileFolder.mkdir();
+                    try {
+                        saveCoursesAsTxt(fileFolder, objectCourses);
+                        List<Object> objectCourseQuizzes = new ArrayList<>();
+                        for (Object o : objectCourses)
+                            objectCourseQuizzes.add(((Course) o).getCourseQuizz());
+                        saveQuizzesAsTxt(fileFolder, objectCourseQuizzes);
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), R.string.err_generare_Raport_Txt, Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.err_generare_raport, Toast.LENGTH_LONG).show();
+                }
+            }
         };
+    }
+
+    private void saveQuizzesAsTxt(File fileFolder, List<Object> courseQuizz) throws IOException {
+        File file = new File(fileFolder, "raport_teste.txt");
+        FileWriter writer = new FileWriter(file);
+        for (Object quizz : courseQuizz) {
+            int size = ((CourseQuizz) quizz).getQuizzes().length;
+            for (int i = 0; i < size; i++) {
+                writer.append(((CourseQuizz) quizz).getQuizzes()[i].getQuestion());
+                writer.append("\n");
+                writer.append(((CourseQuizz) quizz).getQuizzes()[i].getChoices()[((CourseQuizz) quizz).getQuizzes()[i].getAnswerIndex()]);
+                writer.append("\n\n");
+            }
+        }
+        writer.flush();
+        writer.close();
+        Toast.makeText(getApplicationContext(), R.string.succes_generare_rap_curs, Toast.LENGTH_SHORT).show();
+    }
+
+    private void saveCoursesAsTxt(File fileFolder, List<Object> courses) throws IOException {
+        File file = new File(fileFolder, "raport_cursuri.txt");
+        FileWriter writer = new FileWriter(file);
+        for (Object course : courses) {
+            writer.append(((Course) course).getTitle());
+            writer.append("\n");
+            writer.append(((Course) course).getDescription());
+            writer.append("\n\n");
+        }
+        writer.flush();
+        writer.close();
+        Toast.makeText(getApplicationContext(), R.string.succes_generare_rap_curs, Toast.LENGTH_SHORT).show();
     }
 
     private void configNavigation() {
