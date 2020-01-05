@@ -1,9 +1,11 @@
 package local.cipri.mobilelearningapp;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -15,6 +17,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -69,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String REQUIEST_KEY = "reqCode";
     public static final int COURSES_REQUEST_CODE = 100;
     public static final int QUIZZES_REQUEST_CODE = 200;
+    public static final int PERMISSION_REQ_CODE = 300;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -89,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestPermision();
         setContentView(R.layout.activity_main);
         tvDate = findViewById(R.id.et_date_select_main);
         initListViews();
@@ -220,15 +226,18 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra(REQUIEST_KEY, QUIZZES_REQUEST_CODE);
                     startActivityForResult(intent, QUIZZES_REQUEST_CODE);
                 } else if (item.getItemId() == R.id.main_nav_save_rap) {
-                    performSaveAsTxt();
+                    if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                    )
+                        performSaveAsTxt();
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
 
             private void performSaveAsTxt() {
-                if (objectCourses != null && objectCourses.size()>0) {
-                    File fileFolder = new File(MainActivity.this.getFilesDir(), "rapoarte");
+                if (objectCourses != null && objectCourses.size() > 0) {
+                    File fileFolder = new File("/storage/emulated/0/Download","rapoarteMLA");
                     if (!fileFolder.exists())
                         fileFolder.mkdir();
                     try {
@@ -245,6 +254,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+    }
+
+    private void requestPermision() {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+        )
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQ_CODE);
     }
 
     private void saveQuizzesAsTxt(File fileFolder, List<Object> courseQuizz) throws IOException {
