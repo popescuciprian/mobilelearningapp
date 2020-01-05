@@ -114,7 +114,6 @@ public class CoursesFragment extends Fragment {
                         .commit();
                 Intent intent = getActivity().getIntent().putParcelableArrayListExtra(COURSES_KEY, (ArrayList<? extends Parcelable>) courses);
                 getActivity().setResult(getActivity().RESULT_OK, intent);
-//                getActivity().finish();
             }
         };
     }

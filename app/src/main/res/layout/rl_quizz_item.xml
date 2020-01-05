@@ -12,14 +12,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
             android:textSize="20sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:id="@+id/tv_quizz_desc"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:textSize="20sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:id="@+id/tv_quizz_nr_questions"/>
     </LinearLayout>
 
