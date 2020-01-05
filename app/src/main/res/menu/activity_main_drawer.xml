@@ -4,20 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/nav_menu"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/main_nav_courses"
             android:icon="@drawable/xml"
-            android:title="Cursuri"/>
+            android:title="@string/cursuri" />
         <item
             android:id="@+id/main_nav_quizzes"
             android:icon="@drawable/book_open_variant"
-            android:title="Teste de verificare"/>
+            android:title="@string/teste_de_verificare" />
 
-<!--        <item-->
-<!--            android:id="@+id/app_bar_switch"-->
-<!--            android:title="Switch"-->
-<!--            app:actionLayout="@layout/switch_item" />-->
+        <item
+            android:id="@+id/app_bar_switch"
+            android:icon="@drawable/account_check"
+            android:title="@string/main_nav_autoLogin"
+            app:actionLayout="@layout/switch_item" />
 
     </group>
 

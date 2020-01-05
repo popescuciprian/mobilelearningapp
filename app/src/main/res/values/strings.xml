@@ -23,5 +23,14 @@
     <string name="success_login">Autentificare reusita!</string>
     <string name="success_register">Inregistrare reusita!</string>
     <string name="error_register_default">Inregistrare esuata!</string>
+    <string name="select_main_btn">select</string>
+    <string name="date_format">dd-mm-yyyy</string>
+    <string name="label_main">Selecteaza cursuri dupa o data</string>
+    <string name="err_date_Select">Data invalida! Formatul este dd-mm-yyyy!</string>
+    <string name="err_select_main">Nu exista cursuri descarcate / noi</string>
+    <string name="main_nav_autoLogin">AutoLogin</string>
+    <string name="teste_de_verificare">Teste de verificare</string>
+    <string name="cursuri">Cursuri</string>
+    <string name="auto_login_toast">Logare automata!</string>
 
 </resources>
