@@ -1,0 +1,460 @@
+{
+    "courses": [
+        {
+            "about": {
+                "title": "Seminar1",
+                "author": "prof. Alexandru Dita",
+                "date": "20-11-2019"
+            },
+            "description": "Android programming basics",
+            "content": "<h3 id=\"mediu-de-lucru\">Mediu de lucru</h3><p>Mediul de lucru pentru dezvoltarea aplicatiilor mobile este Android Studio.<br>Disponibil <a href=\"http://developer.android.com/sdk/index.html\">aici</a>.</p><h3 id=\"informatii-aprofundate\">Informatii aprofundate</h3><ul><li><strong>Activitate</strong> -&gt; unitatea de baza dintr-un proiect Android. Orice aplicatie mobila are cel putin o activitate, care trebuie sa fie Main si Launcher. O activitate este formata din doua componente: o clasa Java - responsabila cu manipularea datelor, respectiv un fisier xml - responsabil cu construirea interfetei grafice</li><li><strong>res</strong> -&gt; folderul care contine toate resursele proiectului. Este format din layout, drawable, mipmap, values(colors.xml, styles.xml, strings.xml), menu etc.</li><li><strong>layout</strong> -&gt; folderul care contine xml-urile corespunzatoare unei activitati</li><li><strong>strings.xml</strong> -&gt; contine toate constantele de tip text care apar pe ecranul dispozitivului mobil.</li><li><strong>menu</strong> -&gt; folderul care contine xml-urile coresponzatoare unui meniu</li><li><strong>Ciclul de viata al unei activitati</strong> -&gt; reprezinta starile prin care o activitate trece pe parcursul unei executii. Este format din urmatoarele metode: <strong>onCreate()</strong> - <em>singura metoda obligatorie pe care o activitate trebuie sa o implementeze. Este responsabila cu atasarea fisierul xml (din layout) corespunzator clasei Java</em>; <strong>onPause()/onStop()</strong> - <em>se pot executa de mai multe ori. Sunt declansate in momentul in care activitatea nu se mai afla pe firul principal de executie al telefonului(ex: introducem aplicatia in background). In interiorul acestor metode se realizeaza inchiderea diverselor conexiune</em>; <strong>onResume()/onStart()</strong> - <em>se pot executa de mai multe ori. Sunt declansate in momentul in care activitatea revine pe firul principal de executie al telefonului. In interiorul acestora se refac conexiunele externe</em>; <strong>onDestroy</strong> - <em>se executa o singura data, in momentul in care se doreste distrugerea activitatii. Ex: se inchide aplicatia, se apeleaza metoda finish()</em></li><li><strong>Utilizarea resurselor</strong> -&gt; se realizeaza dupa urmatoarele reguli: <strong>in fisierele xml</strong>: 1.&#39;@&lt;nume_folder&gt;/&lt;nume_fisier&gt;&#39; - pentru toate folderele mai putin &#39;values&#39;; 2.&#39;@&lt;nume_fisier&gt;/&lt;valoare_proprietate_name&gt;&#39; - pentru fisierele din folderul &#39;values&#39;; 3. &#39;@id/&lt;valoare_proprietate_android:id&gt;&#39; - pentru componentele vizuale care au proprietatea android:id populata.<br><strong>in java</strong>: 1.&#39;R.&lt;nume_folder&gt;.&lt;nume_fisier&gt;&#39; - pentru toate folderele mai putin &#39;values&#39;; 2.&#39;R.&lt;nume_fisier&gt;.&lt;valoare_proprietate_name&gt;&#39; - pentru fisierele din folderul &#39;values&#39;; 3. &#39;R.id.&lt;valoare_proprietate_android:id&gt;&#39; - pentru componentele vizuale care au proprietatea android:id populata.</li><li><strong>setContentView</strong> -&gt; metoda utilizata pentru atasarea unui fisier din res/layout unei clase Java care extinde AppCompatActivity(clasa parinte pentru marcarea unei activitati). Parametru de intarare calea catre layout (R.layout.&lt;nume_fisier&gt;)</li><li><strong>onCreateOptionsMenu</strong> - metoda implementata intr-o activitate pentru astarea unui meniu. Parametru de intrare obiect Menu(clasa Java de tip resursa corespunzatoare fisierului xml din res/menu).</li><li><strong>MenuInflater</strong> - clasa utilitara care asigura asocierea dintre un obiect Java de tip Menu cu xml-ul corespunzator din res/menu. Metoda utilizata inflate, care primeste calea catre fisierul xml si instanta Java de tip Menu.</li></ul>",
+            "quizz": [
+                {
+                    "question": "Intrebarea 1 despre: Android programming basics",
+                    "choices": [
+                        "Raspunsul 1 despre: Android programming basics",
+                        "Raspunsul 2 despre: Android programming basics",
+                        "Raspunsul 3 despre: Android programming basics"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 2 despre: Android programming basics",
+                    "choices": [
+                        "Raspunsul 1 despre: Android programming basics",
+                        "Raspunsul 2 despre: Android programming basics",
+                        "Raspunsul 3 despre: Android programming basics"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 3 despre: Android programming basics",
+                    "choices": [
+                        "Raspunsul 1 despre: Android programming basics",
+                        "Raspunsul 2 despre: Android programming basics",
+                        "Raspunsul 3 despre: Android programming basics"
+                    ],
+                    "answerIndex": 1
+                }
+            ]
+        },
+        {
+            "about": {
+                "title": "Seminar2",
+                "author": "prof. Alexandru Dita",
+                "date": "18-10-2019"
+            },
+            "description": "Tipuri Layout",
+            "content": "<h3 id=\"tipuri-layout\">Tipuri Layout</h3><p>Layouturile definesc structura interfetei grafice in aplicatiile mobile. Rolul acestora este de a gazdui diferite componente vizuale(widgets) intr-o anumita ordine.</p><ol><li><p>LinearLayout -&gt; alineaza toate componentele vizuale intr-o singura directie(verticala/orizontala). Directia este specificata cu ajutorul proprietatii &#39;android:orientation&#39;. De asemenea, permite distribuirea dinamica a spatiului intre componentele vizuale, prin intermediul proprietatilor: weightSum - este populata la nivelul tag-ului &lt;LinearLayout&gt;; valoarea acesteia este un intreg(nu conteaza valoarea) ce reprezinta numarul de unitati pe care containerul le poate imparti; layout_weight - este populat la nivelul componentelor vizuale. Valoarea acesteia este in intervalul [0, weightSum]. Aceasta reprezentand proportia spatiului ocupat de componenta vizuala in container; Pentru folosirea acestor proprietati este necesar ca layout_width sau layout_height sa aiba valoarea 0dp(aceasta decizie este luata in functie de valoarea proprietatii android:orientation, daca este vertical atunci layout_height este marcat cu 0, altfel layout_width).<br>Mai multe detalii <a href=\"https://developer.android.com/reference/android/widget/LinearLayout\">aici</a></p></li><li><p>RelativeLayout -&gt; afiseaza elementele vizuale in pozitii relative. Pozitia se poate stabili atat in functie de parinte cat si de celelalte componente vizuale. Pozitia este stabilita din punctul stange-sus. Proprietati specifice: layout_alignParentTop, layout_alignParentLeft, layout_alignParentRight, layout_alignParentBottom, layout_centerVertical, layout_centerHorizontal, layout_below, layout_above, layout_toRightOf, layout_toLeftOf<br>Mai multe detalii <a href=\"https://developer.android.com/reference/android/widget/RelativeLayout\">aici</a></p></li><li><p>ConstraintsLayout -&gt; reprezinta o combinatie intre LinearLayout si RelativeLayout. Proprietati specifice: layout_constraintStart_toStartOf, layout_constraintStart_toBottomOf, layout_constraintStart_toEndOf, layout_constraintStart_toTopOf, layout_constraintTop_toTopOf ..., layout_constraintBottom_toBottomOf etc<br>Mai multe detalii <a href=\"https://developer.android.com/reference/android/support/constraint/ConstraintLayout\">aici</a></p></li><li><p>DrawerLayout -&gt; utilizat pentru desenul meniurilor navigabile.<br>Mai multe detalii <a href=\"https://developer.android.com/reference/android/support/v4/widget/DrawerLayout\">aici</a></p></li><li><p>FrameLayout -&gt; afiseaza o singura componenta in ecran. Este utilizat in special pentru afiseaza fragmentelor.<br>Mai multe detalii <a href=\"https://developer.android.com/reference/android/widget/FrameLayout\">aici</a></p></li><li><p>CoordinatorLayout -&gt; deriva din FrameLayout, fiind utilizat pentru afisarea Chrome-ului sau componentei NavigationDrawer.<br>Mai multe detalii <a href=\"https://developer.android.com/reference/android/support/design/widget/CoordinatorLayout\">aici</a></p></li></ol><h3 id=\"alte-elemente\">Alte elemente</h3><ul><li><strong>findViewById()</strong> -&gt; metoda ce apartine de AppCompatActivity. Este responsabila cu instantierea unui obiect Java de tipul componentelor vizuale cu corespondentul din layout(fisiere xml). Are un singur parametru de intrare de tip int, care reprezinta id-ul widget-ului(valoarea proprietatii android:id din xml)</li><li><strong>Toolbar</strong> -&gt; clasa Java corespunzatoarea componentei vizuale &lt;Toolbar&gt;. Reprezinta bara de actiune dintr-o aplicatie mobila.</li><li><strong>setSupportActionBar()</strong> -&gt; metoda ce apartine de AppCompatActivity. Este utilizata pentru a atasa unei activitati un obiect de tipul Toolbar. La nivel vizual, apare bara de actiune. Are un singur parametru de intrare de tip Toolbar</li><li><strong>DrawerLayout</strong> -&gt; clasa Java corespunzatoare containerului DrawerLayout. Este utilizata pentru construirea meniul navigabil si manipularea evenimentelor acestuia.</li><li><strong>ActionBarDrawerToggle</strong> -&gt; clasa Java avand urmatoarele responsabilitati: asigura asocierea dintre Toolbar(bara de actiune) si DrawerLayout(meniul lateral); afiseaza la nivel de interfata burger menu in partea stanga-sus, iar prin apasarea acestuia este realizata actiunea de deschidere/inchidere a meniului lateral. Constructorul clasei primeste o instanta de tip Activity, un DrawerLayout, un Toolbar si doua id-uri din strings.xml care ar trebui sa aibe urmatoarele denumir: navigation_drawer_open, navigation_drawer_close(acestea reprezinta cele doua stari in care se poate afla ActionBarDrawerToggle). Daca cele doua id-uri nu sunt prezenta in strings.xml ar trebui adaugate.</li><li><strong>syncState()</strong> -&gt; metoda de la nivelul ActionBarDrawerToggle. Asigura sincronizarea starii instantei apelate.</li><li><strong>NavigationView</strong> -&gt; componenta vizuala utilizata pentru implementarea meniului lateral. Container de care apartine este DrawerLayout. Este formata din doua elemente: <em><strong>header</strong></em> - reprezinta partea superioara din meniu. Proprietate utilizata &#39;app:headerLayout&#39; - valoarea acesteia fiind un fiser xml din res/layout; <em><strong>menu</strong></em> - reprezinta optiunile meniului lateral. Proprietate utilizata &#39;app:menu&#39; - valoarea acesteia fiind un fisier xml din res/menu.</li></ul>",
+            "quizz": [
+                {
+                    "question": "Intrebarea 1 despre: Tipuri Layout",
+                    "choices": [
+                        "Raspunsul 1 despre: Tipuri Layout",
+                        "Raspunsul 2 despre: Tipuri Layout",
+                        "Raspunsul 3 despre: Tipuri Layout"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 2 despre: Tipuri Layout",
+                    "choices": [
+                        "Raspunsul 1 despre: Tipuri Layout",
+                        "Raspunsul 2 despre: Tipuri Layout",
+                        "Raspunsul 3 despre: Tipuri Layout"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 3 despre: Tipuri Layout",
+                    "choices": [
+                        "Raspunsul 1 despre: Tipuri Layout",
+                        "Raspunsul 2 despre: Tipuri Layout",
+                        "Raspunsul 3 despre: Tipuri Layout"
+                    ],
+                    "answerIndex": 1
+                }
+            ]
+        },
+        {
+            "about": {
+                "title": "Seminar3",
+                "author": "prof. Alexandru Dita",
+                "date": "18-10-2019"
+            },
+            "description": "Componente Vizuale",
+            "content": "<h3 id=\"componente-vizuale-\">Componente vizuale:</h3><ul><li><strong>RadioGroup</strong> -&gt; container special utilizat pentru gazduirea mai multor RadioButton-uri. Are aceleasi proprietati ca si LinearLayout. Acesta asigura crearea unui context special pentru RadioButton-urile din interiorul sau, asigurand alegerea unei singure optiuni dintr-un set. Mai multe detalii <a href=\"https://developer.android.com/reference/android/widget/RadioGroup\">aici</a></li><li><strong>RadioButton</strong> -&gt; O componenta vizuala ce are proprietatea checked pentru a stoca raspunsul utilizatorului. Mai multe detalii <a href=\"https://developer.android.com/guide/topics/ui/controls/radiobutton\">aici</a></li><li><strong>TextInputLayout</strong> -&gt; este o componenta vizuala care este formata dintr-un EditText, iar in momentul in care user-ul completeaza campul hint-ul EditTextului este transformat intr-un TextView. Mai multe detalii <a href=\"https://developer.android.com/reference/android/support/design/widget/TextInputLayout\">aici</a></li><li><strong>Spinner</strong> -&gt; este o componenta vizuala ce asigura selectia unei optiuni dintr-o lista derulanta. Lista se incarca intr-un Spinner prin intermediul unui Adapter. Mai multe detalii <a href=\"https://developer.android.com/guide/topics/ui/controls/spinner\">aici</a></li><li><strong>FloatingActionButton</strong> -&gt; este o componenta vizuala ce a aparut in versiunile recente ale Android-ului, reprezentand o varianta imbunatatita a Button-ului. Acesta are forma de cerc, si inlocuieste eticheta cu o imagine vectorial, ce se poate adauga in res/drawable. Mai multe detalii <a href=\"https://developer.android.com/reference/android/support/design/widget/FloatingActionButton\">aici</a></li></ul><h3 id=\"alte-elemente-\">Alte elemente:</h3><ul><li><strong>getApplicationContext</strong> -&gt; metoda ce apartine clasei AppCompatActivity, fiind utilizata pentru obtinerea contextului aplicatiei mobile. Contextul reprezinta mediul de care se leaga toate componentele vizuale si activitatile. Fiecare solutie mobila are un context definit, astfel incat sistemul de operare Android sa stie ce informatii incarca in ecranul utilizatorului intr-un anumit moment de timp.</li><li><strong>setOnClickListener</strong> -&gt; metoda ce apartine unor componente, precum: Button sau FloatingActionButton. Este declansata in momentul in care utilizatorul apasa pe componenta vizuala. Primeste ca parametru de intrare o instanta a unei clasei ce trebuie sa implementeze interfata View.OnclickListener. In momentul in care se implementeaza aceasta interfata este obligatoriu suprscrierea metodei onClick. In interiorul acesteia se adauga codul care e doreste sa se execute in momentul declansarii acestui eveniment.</li><li><strong>Intent</strong> -&gt; este o clasa care permite deschiderea unei activitati din interiorul alteia. De asemenea, este utilizata pentru transmiterea diferitelor tipuri de date intre activitati. Permite transferul atat a tipurilor primitive - int, long, double, String, cat si a clasele custom - acestea trebuie sa implementeze Serializable sau Parcelable. Constructorul clasei primeste Contextul aplicatiei si class type-ul activitatii pe care o deschidem.</li><li><strong>startActivity</strong> -&gt; metoda ce apartine clasei AppCompatActivity, scopul metodei fiind deschidere unei activitati din interiorul alteia. Constructorul acesteia</li><li><strong>Adapter</strong> -&gt; O clasa utilitara care se comporta ca o punte intre componentele vizuale si o lista de elemene. Creaza view-urile pentru fiecare element al unei liste de obiecte. De asemenea, ofera accesul din interfata la lista de obiecte.</li><li><strong>ArrayAdapter</strong> -&gt; este un adapter care foloseste un vector de obiecte. Sursa de preluare a vectorului poate sa fie: in memoria Java, din baza de date, din retea sau din strings.xml. Acest adapter este responsabil sa incarce fiecare element al vectorului intr-un TextView. De asemenea, Textview-ul este populat cu metoda toString() al obiectelor din vector.</li><li><strong>string-array</strong> -&gt; tag utilizat pentru definirea unui vector static in res/values/strings.xml</li></ul>",
+            "quizz": [
+                {
+                    "question": "Intrebarea 1 despre: Componente Vizuale",
+                    "choices": [
+                        "Raspunsul 1 despre: Componente Vizuale",
+                        "Raspunsul 2 despre: Componente Vizuale",
+                        "Raspunsul 3 despre: Componente Vizuale"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 2 despre: Componente Vizuale",
+                    "choices": [
+                        "Raspunsul 1 despre: Componente Vizuale",
+                        "Raspunsul 2 despre: Componente Vizuale",
+                        "Raspunsul 3 despre: Componente Vizuale"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 3 despre: Componente Vizuale",
+                    "choices": [
+                        "Raspunsul 1 despre: Componente Vizuale",
+                        "Raspunsul 2 despre: Componente Vizuale",
+                        "Raspunsul 3 despre: Componente Vizuale"
+                    ],
+                    "answerIndex": 1
+                }
+            ]
+        },
+        {
+            "about": {
+                "title": "Seminar4",
+                "author": "prof. Alexandru Dita",
+                "date": "22-10-2019"
+            },
+            "description": "Parsare date intre activitati",
+            "content": "<h3 id=\"informatii-aprofundate\">Informatii aprofundate</h3><ul><li><p><strong>startActivityForResult()</strong> -&gt; metoda folosita pentru a porni o activitate cu scopul de a intoarce anumite informatii procesate. Are doi param: intentul care contine activitatea destinatie; requestCode o variabila int care reprezinta un cod unic de apel fiind folosit in <strong>onActivityResult</strong> pentru a recunoaste sursa de informatii. Aceasta metoda se poate apela de mai multe ori in interiorul unei activitati, iar fiecare apel poate sa deschida o activitate diferita. Prin urmare, unicitatea requestCode-ul este vitala.</p></li><li><p><strong>onActivityResult()</strong> -&gt; metoda este suprascrisa de catre activitatea care a apelat <strong>startActivityForResult()</strong>. Momentul de executie al acestei metode este determinat de finalizarea apelurilor metodelor <strong>setResult()</strong>, respectiv <strong>finish()</strong>. Metoda are trei param, si anume: requestCode - trebuie sa fie egal cu cel din <strong>startActivityForResult()</strong>;<br>resultCode - trebuie sa fie egal cu cel din <strong>setResult()</strong>; data - trebuie sa fie diferit de null daca se doreste preluarea unor informatii. Scopul acestei metode este de a prelua datele din intent. Informatiile primite prin Intent se pierd daca nu sunt stocate (in memorie/fisiere/baza de date) pana la finalizare executiei acestei metode.</p></li><li><p><strong>setResult()</strong> -&gt; metoda utilizata in clasa deschisa cu metoda startActivityForResult() pentru a intoarce rezultatele asteptate de activitatea apelator. Metoda primeste doi param: resultCode - se marcheaza tipul de raspuns (pentru un rezultat corect se utilizeaza RESULT_OK); data - Intentul cu care s-a deschis activitatea si care contine informatiile pe care dorim sa le transmitem.</p></li><li><p><strong>finish()</strong> -&gt; metoda utilizata pentru a finaliza ciclul de viata al unei activitati.</p></li><li><p><strong>Parcel</strong> -&gt; Container de mesaje. Este folosit pentru a transmite obiecte java intre activitati.</p></li><li><p><strong>Parcelable</strong> -&gt; Interfata implementata de clasele java pe care dorim sa le transmitem intre activitati prin intermediul unui Parcel. Permite scrierea si citirea dintr-un Parcel. Trebuie sa implementam doua metode: <strong>writeToParcel()</strong>, <strong>describeContents()</strong>. Trebuie definit un obiect public static numit CREATOR de tipul Parcelable.Creator pentru a se realiza operatie de citire. Obiectul Creator implementeaza metoda <strong>createFromParcel()</strong> care realizeaza citirea. Implementarea are o singura regula, si anume ordinea de citire trebuie sa fie la fel cu cea de scriere.</p></li><li><p><strong>putExtra()</strong> -&gt; metoda disponibila la nivelul clasei Intent, fiind utilizata pentru salvarea unui obiect custom in Intent. Clasa obiectului salvat implementeaza interfata Parcelable.</p></li><li><p><strong>getParcelableExtra()</strong> -&gt; metoda disponibila la nivelul clasei Intent, fiind utilizata pentru preluare unui obiect custom din Intent. Clasa obiectului preluat implementeaza interfata Parcelable. Parametrul de intrare reprezinta cheia pe care s-a salvat obiectiul prin apelul metodei <strong>putExtra()</strong>.</p></li><li><p><strong>getText()</strong> -&gt; metoda disponibila la nivelul componente vizuale de tip input, precum: EditText, TextInputEditText, RadioButton etc. Asigura preluarea informatiei introduse de utilizator.</p></li><li><p><strong>Toast</strong> -&gt; Clasa Java prin intermediul careia se afiseaza mesaje temporare pe ecranul dispozitivului mobil. Pentru construirea unei instante, se utilizeaza metoda <strong>makeText()</strong> care are 3 param: Contextul aplicatiei, Id-ul resursei din strings.xml care reprezinta mesajul ce se afieaza si durata de afisarea ce se masoara in milisecunde. Pentru a afisa mesajul pe ecran se apeleaza metoda <strong>show()</strong>.</p></li><li><p><strong>getSelectedItem()</strong> -&gt; metoda disponibila la nivelul obiectelor de tip Spinner si intorc valoarea selectat de utilizator din lista de optiuni.</p></li><li><p><strong>getCheckedRadioButtonId()</strong> -&gt; metoda disponibila la nivelul obiectelor de tip RadioGroup si intorc id-ul RadioButton-ului din interiorul acestui container care are proprietatea <strong>checked</strong> true.</p></li><li><p><strong>SimpleDateFormat</strong> -&gt; este o clasa din Java core utilizata pentru conversia de la String la Date, respectiv de la Date la String. Aceasta primeste un format de data pe care sa-l aplice in timpul conversie. Metoda utilizate pentru conversie sunt: <strong>parse()</strong> - utilizata pentru extragerea unui obiect Date dintr-un String. Executie se realizeaza intr-un block de try-catch, deoarece metoda arunca o exceptie ce trebuie tratata; <strong>format()</strong> - utilizata pentru transformarea unui obiect Date in String.</p></li></ul>",
+            "quizz": [
+                {
+                    "question": "Intrebarea 1 despre: Parsare date intre activitati",
+                    "choices": [
+                        "Raspunsul 1 despre: Parsare date intre activitati",
+                        "Raspunsul 2 despre: Parsare date intre activitati",
+                        "Raspunsul 3 despre: Parsare date intre activitati"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 2 despre: Parsare date intre activitati",
+                    "choices": [
+                        "Raspunsul 1 despre: Parsare date intre activitati",
+                        "Raspunsul 2 despre: Parsare date intre activitati",
+                        "Raspunsul 3 despre: Parsare date intre activitati"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 3 despre: Parsare date intre activitati",
+                    "choices": [
+                        "Raspunsul 1 despre: Parsare date intre activitati",
+                        "Raspunsul 2 despre: Parsare date intre activitati",
+                        "Raspunsul 3 despre: Parsare date intre activitati"
+                    ],
+                    "answerIndex": 1
+                }
+            ]
+        },
+        {
+            "about": {
+                "title": "Seminar5",
+                "author": "prof. Alexandru Dita",
+                "date": "29-10-2019"
+            },
+            "description": "Bundles",
+            "content": "<h3 id=\"informatii-aprofundate\">Informatii aprofundate</h3><ul><li><p><strong>Bundle</strong> -&gt; clasa container responsabila cu stocarea difertelor informatii ce se doresc a se transmite intre activitati sau de la o activitate catre un fragment. Are dispunerea si utilitate asemanatoare unui Map. Aceasta clasa dispune de metode de tipul cheie-valoare a caror denumire incepe cu &#39;put&#39;. Metoda <strong>onCreate()</strong> prezinta un paramentru de intrare de tip Bundle, denumit onSavedInstanceState fiind utilizat in salvarea starii unei activitati. Procesul de salvarea consta in pastrea informatii adaugate de utilizator in momentul in care se intampla una din urmatoarele situatii: rotierea dispozitivului mobil sau revenirea in activitatea prin apasarea butonul back. Daca valoarea parametrului <strong>onSavedInstanceState</strong> este null atunci utilizatorul a intrat prima data in activitatea respectiva.</p></li><li><p><strong>NavigationView</strong> -&gt; clasa Java corespunzatoare componentei vizuale &lt;NavigationView&gt; reprezentand meniul lateral. In Java este utilizata pentru a interactiona cu optiunile meniului lateral.</p></li><li><p><strong>OnNavigationItemSelectedListener</strong> -&gt; Interfata ce apartine clasei NavigationView fiind responsabila cu interceptarea momentului in care una din optiunile meniului lateral este apasata.</p></li><li><p><strong>Fragment</strong> -&gt; reprezinta o parte reutilizabila dintr-o interfata. Fragmentul este asemanator unei activitati fiind compus dintr-o clasa Java, ce extinde <em>Fragment</em> si un fisier xml, ce se regaseste in res/layout reprezentand interata fragmentului. Prezinta ciclu de viata propriu, dar este dependent de cel al activitatii in care este folosit. Prin urmare, un fragment nu se poate utiliza decat in interiorul unei activitati. Metodele ciclului de viata sunt: onAttach() - este apelata in momentul in care fragmentul este atasat unei activitati; onCreate() - crearea in memorie a clasei Java; onCreateView() - ataseaza clasei Java de tip Fragment fisierul xml corespunzator; onStop() - la fel ca la activitati; onPause() - la fel ca la activitati; onResume() - la fel ca la activitati; onStart() - la fel ca la activitati; onDestroyView() - asigura eliminarea legaturii dintre clasa Java de tip Fragment si xml corespunzator; onDestroy() - distruge clasa Java de tip Fragment; onDetach() - este apelata atunci cand fragmentul nu mai este legat de o activitate.<br>O activitate ca sa poata folosi fragmente trebuie sa contina o componenta vizuala de tip &lt;FrameLayout&gt;. De asemenea, in cadrul unei activitati se pot adauga mai multe fragmente in acelas timp, conditia fiind sa existe cate un FrameLayout pentru fiecare fragmet. Avantajul obtinut prin utilizarea fragmentelor este incarcarea unui continut dinamic intr-o activitate/activitati. Mai multe detalii <a href=\"https://developer.android.com/reference/android/app/Fragment\">aic</a>.</p></li><li><p><strong>FragmentManager</strong> -&gt; clasa utilitara folosita pentru adaugarea unui fragment in cadrul unei activitati.</p></li><li><p><strong>beginTransaction()</strong> -&gt; metoda disponibila la nivelul clasei <strong>FragmentManager</strong>. Apelul acesteia sepcifica activitatii ca urmeaza sa i se ataseze un fragment.</p></li><li><p><strong>replace()</strong> -&gt; metoda disponibila la nivelul clasei <strong>FragmentManager</strong>. Apelul acesteia asigura inlocuirea componentei &lt;FrameLayout&gt; cu continutul unui fragment. Prezinta doi param, si anume: id-ul componentei &lt;FrameLayout&gt; din cadrul activitatii pe care dorim sa o inlocuim, respectiv instanta fragmentului.</p></li><li><p><strong>commit()</strong> -&gt; metoda disponibila la nivelul clasei <strong>FragmentManager</strong>. Apelul acesteia asigura afisarea fragmentului pe ecranul dispozitivului mobil.</p></li><li><p><strong>setArguments()</strong> -&gt; metoda disponibila la nivelul clasei <strong>Fragment</strong>. Asigura transferul de informatii de la o activitate catre fragment. Prezinta un singur parametru de intrare de tip Bundle.</p></li><li><p><strong>ListView</strong> -&gt; componenta vizuala utilizata pentru afisarea unei liste derulante. Mai multe detalii <a href=\"https://developer.android.com/reference/android/widget/ListView\">aici</a>.</p></li></ul>s",
+            "quizz": [
+                {
+                    "question": "Intrebarea 1 despre: Bundles",
+                    "choices": [
+                        "Raspunsul 1 despre: Bundles",
+                        "Raspunsul 2 despre: Bundles",
+                        "Raspunsul 3 despre: Bundles"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 2 despre: Bundles",
+                    "choices": [
+                        "Raspunsul 1 despre: Bundles",
+                        "Raspunsul 2 despre: Bundles",
+                        "Raspunsul 3 despre: Bundles"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 3 despre: Bundles",
+                    "choices": [
+                        "Raspunsul 1 despre: Bundles",
+                        "Raspunsul 2 despre: Bundles",
+                        "Raspunsul 3 despre: Bundles"
+                    ],
+                    "answerIndex": 1
+                }
+            ]
+        },
+        {
+            "about": {
+                "title": "Seminar6",
+                "author": "prof. Alexandru Dita",
+                "date": "10-11-2019"
+            },
+            "description": "Data Sets Change",
+            "content": "<h3 id=\"informatii-aprofundate\">Informatii aprofundate</h3><ul><li><p><strong>notifyDataSetChanged()</strong> -&gt; metoda disponibila la nivelul clasei ArrayAdapter. Este responsabila cu reconstruirea adapter-ului asociat unei componente vizuale de tip listare. Este utilizata in momentul in care lista Java folosita in construirea adapterului isi modifica continutul (adaugare/stergere/modificare obiecte)</p></li><li><p><strong>setOnItemClickListener</strong> -&gt; metoda disponibila la nivelul clasei ListView, fiind utilizata pentru atasarea evenimentul de click pe un element din lista vizuala. Ofera ca parametru de intrare pozitia pe care s-a apasat.</p></li><li><p><strong>setSelection</strong> -&gt; metoda disponibila la nivelul clasei Spinner, fiind utilizata pentru afisarea pe ecranul dispozitivului mobil a elementului de pe pozitia &#39;i&#39; din lista de optiuni.</p></li><li><p><strong>check</strong> -&gt; metoda disponibila la nivelul clasei RadioGroup, fiind utilizata pentru selectarea RadioButton-ului cu id-ul specificat ca parametru de intrare.</p></li><li><p><strong>hasExtra</strong> -&gt; metoda disponibila la nivelul clasei Intent, fiind utilizata pentru a se verifica daca intentul contine un parametru cu numele specificat.</p></li></ul>",
+            "quizz": [
+                {
+                    "question": "Intrebarea 1 despre: Data Sets Change",
+                    "choices": [
+                        "Raspunsul 1 despre: Data Sets Change",
+                        "Raspunsul 2 despre: Data Sets Change",
+                        "Raspunsul 3 despre: Data Sets Change"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 2 despre: Data Sets Change",
+                    "choices": [
+                        "Raspunsul 1 despre: Data Sets Change",
+                        "Raspunsul 2 despre: Data Sets Change",
+                        "Raspunsul 3 despre: Data Sets Change"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 3 despre: Data Sets Change",
+                    "choices": [
+                        "Raspunsul 1 despre: Data Sets Change",
+                        "Raspunsul 2 despre: Data Sets Change",
+                        "Raspunsul 3 despre: Data Sets Change"
+                    ],
+                    "answerIndex": 1
+                }
+            ]
+        },
+        {
+            "about": {
+                "title": "Seminar7",
+                "author": "prof. Alexandru Dita",
+                "date": "12-11-2019"
+            },
+            "description": "JSON files",
+            "content": "<h3 id=\"json-javascript-object-notation\">Json - JavaScript Object Notation</h3><p>Json este o cale de stocare a informatiile intr-o forma organizata. Json-ul poate avea structura omogena(reprezentare obiectelor din POO) sau neomogena. Tipurile de date pe care le suporta un Json sunt: numeric(int, double, float), boolean si string.</p><h4 id=\"elemente-cheie-\">Elemente cheie:</h4><ul><li><strong>{}</strong> -&gt; reprezentarea unui obiect. La nivel de Java se poate defini o clasa care sa contina atributele din interiorul acestor paranteze</li><li><strong>[]</strong> -&gt; reprezentarea unui vector. In Java se pot construi vectori de valori sau daca simbolul [ este urmat de { este vorba despre un vector/lista de obiecte.</li><li><strong>:</strong> -&gt; Are dubla reprezentare, si anume: ce se afla in partea stanga este numele atributului, iar ce se afla in partea dreapta este valoarea pe care o are acel atribut.</li><li><strong>,</strong> -&gt; separator de atribute in cadrul unei obiect sau array.</li></ul><h4 id=\"alte-informatii-\">Alte informatii:</h4><ul><li><p><strong>AsyncTask</strong> -&gt; este o clasa abstracta de tip template. Este utilizata pentru realizarea unor procesarii pe un alt fir de executie, paralel cu cel al aplicatiei. Ofera o serie de metoda care asigura preluarea informatiilor pe acest fir separat de executie si trimiterea lor catre firul principal. Pornirea unui fir de executie cu ajutorul clasei AsynTask se realizeaza prin apelul metodei <strong>execute</strong>. Este o clasa template fiind formata din: Params - reprezinta tipul paramtrului de intrare a metodelor <strong>execute()</strong> si <strong>doInBackground</strong>; Progress - este utilizata in <strong>onProgress</strong> pentru afisarea duratei de executie a threadului; Result - este tipul de date pe care <strong>doInBackground</strong> il returneaza si pe care <strong>onPostExecute</strong> il primeste ca parametru de intrare. Mai multe detalii <a href=\"https://developer.android.com/reference/android/os/AsyncTask\">aici</a>.</p></li><li><p><strong>doInBackground()</strong> -&gt; metoda ce apartine de AsyncTask. Este responsabila cu procesarea informatiilor, in cazul conexiunii prin retea in cadrul acestei metode se descarcarea datelor din locatia dorita. Aceasta metoda se executa tot timpul pe firul secundar de executie, deschis de AsyncTask si nu pe cel principal in care ruleaza activatatea/fragmentul aplicatiei. Rezultatul executiei acestei metode este trimis ca parametru de intrare catre <strong>onPostExecute</strong>.</p></li><li><p><strong>onPostExecute()</strong> -&gt; metoda ce apartine de AsyncTask. Se recomanda implementarea acesteia in cadrul claselor de tip Activity/Fragment/Adapter care se executie sincron pe firul principal al aplicatiei. Primeste ca parametru de intrare ceea ce returneaza <strong>doInBackground</strong>. Aceasta metoda este responsabila cu pasarea informatiilor, procesate pe un alt fir de executie, pe cel principal fara blocarea aplicatiei. Apelul acestei metode este realizat implicit de catre instanta AsyncTask, in momentul in care se finalizeaza executia metoda <strong>doInBackground</strong>.</p></li><li><p><strong>onPreExecute()</strong> -&gt; metoda ce apartine de AsynTask. Este apelata automat de catre aceasta clasa inainte de executie metodei <strong>doInBackground</strong>.</p></li><li><p><strong>onProgress()</strong> -&gt; metoda ce apartine de AsyncTask. Este utilizata pe parcursul executiei metodei <strong>doInBackground</strong> pentru implementarea unor mecanisme de verificare a progresului realizat in cadrul procesarii.</p></li><li><p><strong>URL</strong> -&gt; clasa utilizata pentru validarea unui url si pentru obtinerea unei conexiuni.</p></li><li><p><strong>HttpURLConnection</strong> -&gt; reprezinta o conexiune cu o anumita adresa URL. Asigura preluarea informatiilor din locatia dorita.</p></li><li><p><strong>InputStream</strong> -&gt; clasa utilizata pentru preluare unor bucati de informatii dintr-o anumita locatie.</p></li><li><p><strong>InputStreamReader</strong> -&gt; asigura impartirea unui <strong>InputStream</strong> in unitati mai mici de procesare.</p></li><li><p><strong>BufferedReader</strong> -&gt; utilizarea pentru impartirea unui <strong>InputStreamReader</strong> in unitati mici, astfel incat sa se evite aparitia erorilor de tip TimeOut sau OutOfMemory.</p></li></ul>",
+            "quizz": [
+                {
+                    "question": "Intrebarea 1 despre: JSON files",
+                    "choices": [
+                        "Raspunsul 1 despre: JSON files",
+                        "Raspunsul 2 despre: JSON files",
+                        "Raspunsul 3 despre: JSON files"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 2 despre: JSON files",
+                    "choices": [
+                        "Raspunsul 1 despre: JSON files",
+                        "Raspunsul 2 despre: JSON files",
+                        "Raspunsul 3 despre: JSON files"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 3 despre: JSON files",
+                    "choices": [
+                        "Raspunsul 1 despre: JSON files",
+                        "Raspunsul 2 despre: JSON files",
+                        "Raspunsul 3 despre: JSON files"
+                    ],
+                    "answerIndex": 1
+                }
+            ]
+        },
+        {
+            "about": {
+                "title": "Seminar8",
+                "author": "prof. Alexandru Dita",
+                "date": "21-11-2019"
+            },
+            "description": "Android programming basics",
+            "content": "<h3 id=\"informatii-aprofundate\">Informatii aprofundate</h3><ul><li><p><strong>JSONObject</strong> -&gt; clasa utilizata pentru incarcarea in memoria Java a unui obiect Json primit sub forma de String. In memorie este incarcat sub forma de Map. Asigura validare json-ului primit utilizat prin verificarea existentei pe pozitiei 0 a caracterului &#39;{&#39;. Ofera metode de tip get pentru extragerea informatii, si anume: getString, getBoolean, getJSONObject(String var), getJSONArray(String var) etc.</p></li><li><p><strong>JSONArray</strong> -&gt; clasa utilizata pentru incarcarea in memoria Java a unui vector Json primit sub forma de String. In memorie este incarcat sub forma de Map, unde cheia este de tip int, reprezentand indexul din vector. Asigura validare json-ului primit utilizat prin verificarea existentei pe pozitiei 0 a caracterului &#39;[&#39;. Permite extragerea unor obiect de tip JSONObject prin intermediul indexului.</p></li><li><p><strong>SharedPreferences</strong> -&gt; clasa utilizata pentru gestionarea fisierelor de preferinte. Aceste fisiere au structura tabelara, avand doua coloane, si anume: cheia - variabila String care reprezinta numele unei valori stocate; valoare - variabila de tip String/Integer/Float/Double/Set/Boolean. Aceste fisiere asigura prima forma de stocare persistenta. Durata de viata este echivalenta cu existenta aplicatiei pe dispozitivul mobil. Obiectivele clasei SahredPreferences sunt: incarcarea in memorie a fisierelor de preferinte, citirea informatiilor din fisier - cu ajutorul metodelor de tip get, instantierea obiectelor de tip Editor.</p></li><li><p><strong>Editor</strong> -&gt; clasa utilizata pentru scrierea in fisierele de proprietati. Prezinta metode de tip put, care permita scrierea in fisier.</p></li><li><p><strong>getSharedPreferences</strong> -&gt; metoda disponibila la nivelul unei activitati. Asigura instantierea obiectelor de tip <strong>SharedPreferences</strong>. Are doi parametri de intrare, si anume: numele fisierului, modul de acces(default ar trebui utilizat MODE_PRIVATE - care permite accesul asupra fisierului doar aplicatiei care l-a definit).</p></li><li><p><strong>apply</strong> -&gt; metoda disponibila la nivelul clasei <strong>Editor</strong>, asigurand salvarea efectiva in fisierul de proprietati.</p></li></ul>",
+            "quizz": [
+                {
+                    "question": "Intrebarea 1 despre: Android programming basics",
+                    "choices": [
+                        "Raspunsul 1 despre: Android programming basics",
+                        "Raspunsul 2 despre: Android programming basics",
+                        "Raspunsul 3 despre: Android programming basics"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 2 despre: Android programming basics",
+                    "choices": [
+                        "Raspunsul 1 despre: Android programming basics",
+                        "Raspunsul 2 despre: Android programming basics",
+                        "Raspunsul 3 despre: Android programming basics"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 3 despre: Android programming basics",
+                    "choices": [
+                        "Raspunsul 1 despre: Android programming basics",
+                        "Raspunsul 2 despre: Android programming basics",
+                        "Raspunsul 3 despre: Android programming basics"
+                    ],
+                    "answerIndex": 1
+                }
+            ]
+        },
+        {
+            "about": {
+                "title": "Seminar9",
+                "author": "prof. Alexandru Dita",
+                "date": "27-11-2019"
+            },
+            "description": "SQLite",
+            "content": "<h3 id=\"informatii-aprofundate\">Informatii aprofundate</h3><ul><li><p><strong>Sqlite</strong> -&gt; platforma Android utilizeaza SQLite, ca și sistem de gestiune al bazelor de date. Aceasta este o baza de date SQL open source, care permite stocarea datelor intr-un fisier text pe dispozitivul mobil. SQLite este direct integrata in sistemul de operare, prezentand toate caracteristicile unei baze de date relationale, iar pentru utilizarea acesteia de catre aplicatiile mobile nu este necesar folosirea unui conector, precum JDBC sau ODBC. Tipurile de date acceptate de Sqlite sunt: TEXT, NUMERIC, REAL, INTEGER, BLOB.</p></li><li><p><strong>Room</strong> -&gt; Este un framework care adauga un nivel de abstractizare peste Sqlite pentru a facilita accesul aplicatiei mobile catre aceasta baza de date. Framework pune la dispozitia utilizatorilor o serie de adnotari ce se pot aplica la nivelul claselor, atributelor sau metodelor. Rolul acestor adnotari este de a genera codul necesar pentru realizarea operatiilor de tip DDL si DML asupra bazei de date. Din punctul de vedere al arhitecturii Room este formata din trei componente principale, si anume: <em><strong>database</strong></em> --&gt; este o clasa abstracta ce extinde RoomDatabase, fiind responsabila cu proiectarea bazei de date si deschiderea conexiunilor dintre aplicatia mobila si SQLite. De asemenea, contine lista tabelelor si o serie de metode abastracte care returneaza instante ale claselor adnotate cu @Dao; <em><strong>entity</strong></em> --&gt; este reprezentata de acele clase Java adnotate cu @Entity, acestea fiind tabelele bazei de date; <em><strong>Dao</strong></em> --&gt; este reprezentata de acele interfete din Java adnotate cu @Dao. Scopul lor este de a realiza operatiile de tip DML asupra entitatilor definite anterior;<br>Mai multe detalii despre Room puteti gasi <a href=\"https://developer.android.com/training/data-storage/room\">aici</a></p></li><li><p><strong>@Database</strong> -&gt; adnotare utilizata la nivelul clasei abstracte care reprezinta managerul de proiectare a bazei de date.<br>Aceasta adnotare are trei proprietati, si anume: entities - contine lista de clase Java adnotate cu @Entity care reprezinta tabelele bazei de date; exportSchema - variabila boolean, care asigura crearea unui fisier la nivelul dispozitivului mobil ce contine schema bazei de date, daca valoarea acesteia este true; version - variabila int ce reprezinta versiunea bazei de date.</p></li><li><p><strong>@Dao</strong> -&gt; adnotare utilizata asupra unei interfete Java, nu contine proprietati.</p></li><li><p><strong>@Entity</strong> -&gt; adnotare utilizata asupra claselor Java reprezentand structura tabelei din baza de date. Contine o proprietate de tip String ce reprezinta numele tabelei.</p></li><li><p><strong>@ColumnInfo</strong> -&gt; este aplicata asupra campurilor din clasa adnotata cu @Entity, reprezentand coloana unei tabele.</p></li><li><p><strong>@Insert</strong> -&gt; este aplicata asupra unei metode din cadrul interfetei adnotate cu @Dao, prin intermediul careia la runtime compilatorul extrage scriptul sql pentru operatia de insert.</p></li><li><p><strong>@Update</strong> -&gt; este aplicata asupra unei metode din cadrul interfetei adnotate cu @Dao, prin intermediul careia la runtime compilatorul extrage scriptul sql pentru operatia de update.</p></li><li><p><strong>@Delete</strong> -&gt; este aplicata asupra unei metode din cadrul interfetei adnotate cu @Dao, prin intermediul careia la runtime compilatorul extrage scriptul sql pentru operatia de delete.</p></li><li><p><strong>@Query</strong> -&gt; este aplicata asupra unei metode din cadrul interfetei adnotate cu @Dao. Are o singura proprietate, care este obligatorie, ce contine cod sql, reprezentand selectul pe care il apeleaza Room la executie</p></li><li><p><strong>@TypeConverter</strong> -&gt; este aplicata asupra unor metode. Asigura conversia intre doua tipuri de date neomogene. Este utilizata in special pentru conversia de la Date la Long/int/String si invers.</p></li><li><p><strong>@TypeConverters</strong> -&gt; este aplicata asupra clasei abstracte care extinde RoomDatabase. Are o singura proprietate care prezinta lista de convertari pe care Room ar trebui sa-i aplice in momentul executarii operatiilor de tip select, insert si update.</p></li></ul>",
+            "quizz": [
+                {
+                    "question": "Intrebarea 1 despre: SQLite",
+                    "choices": [
+                        "Raspunsul 1 despre: SQLite",
+                        "Raspunsul 2 despre: SQLite",
+                        "Raspunsul 3 despre: SQLite"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 2 despre: SQLite",
+                    "choices": [
+                        "Raspunsul 1 despre: SQLite",
+                        "Raspunsul 2 despre: SQLite",
+                        "Raspunsul 3 despre: SQLite"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 3 despre: SQLite",
+                    "choices": [
+                        "Raspunsul 1 despre: SQLite",
+                        "Raspunsul 2 despre: SQLite",
+                        "Raspunsul 3 despre: SQLite"
+                    ],
+                    "answerIndex": 1
+                }
+            ]
+        },
+        {
+            "about": {
+                "title": "Seminar10",
+                "author": "prof. Alexandru Dita",
+                "date": "05-12-2019"
+            },
+            "description": "Alert Dialog",
+            "content": "<h3 id=\"informatii-aprofundate\">Informatii aprofundate</h3><ul><li><p><strong>AlertDialog</strong> -&gt; clasa pusa la dispozitie de pachetul Android, fiind utilizata pentru afisare mesajelor de tip pop-up pe ecranul dispozitivului mobil. Pentru a defini o instanta de tip <strong>AlertDialog</strong> este necesar utilizarea clasei <strong>Builder</strong>, care primeste ca parametru de intrare contextul aplicatiei. Mai multe detalii gasiti <a href=\"https://developer.android.com/reference/android/app/AlertDialog\">aici</a></p></li><li><p><strong>setTitle</strong> -&gt; metoda pusa la dispozitie de catre <strong>AlertDialog.Builder</strong>, pentru a adauga numele ce apare pe bara de actiune a popup-ului. Are doua forme de implementare, si anume: accepta string ca parametru de intare, respectiv id-ul unei resurse din strings.xml</p></li><li><p><strong>setMessage</strong> -&gt; metoda pusa la dispozitie de catre <strong>AlertDialog.Builder</strong>, pentru a adauga mesajul ce apare pe popup. Are doua forme de implementare, si anume: accepta string ca parametru de intare, respectiv id-ul unei resurse din strings.xml</p></li><li><p><strong>setPositiveButton</strong> -&gt; metoda pusa la dispozitie de catre <strong>AlertDialog.Builder</strong>, pentru a adauga un buton, care reprezinta actiunea ce trebuie executata daca utilizatorul <strong>este de acord</strong> cu mesajul afisat. Metoda asteapta ca parametru de intrare eticheta butonului, precum si o implementare a evenimentului de click asociat.</p></li><li><p><strong>setNegativeButton</strong> -&gt; metoda pusa la dispozitie de catre <strong>AlertDialog.Builder</strong>, pentru a adauga un buton, care reprezinta actiunea ce trebuie executata daca utilizatorul <strong>nu este de acord</strong> cu mesajul afisat. Metoda asteapta ca parametru de intrare eticheta butonului, precum si o implementare a evenimentului de click asociat.</p></li><li><p><strong>create</strong> -&gt; metoda ce apartine de <strong>AlertDialog.Builder</strong>, iar rolul acesteia este de a initializa in memorie o variabile de tip <strong>AlertDialog</strong>.</p></li><li><p><strong>show</strong> -&gt; metoda ce aprtine de <strong>AlertDialog</strong> asigurand afisarea popup-ului pe ecranul dispozitivului mobil.</p></li><li><p><strong>Paramentru in Strings.xml</strong> -&gt; In strings.xml se pot adauga mesaje statice cu parametru. Regula de forma a acestora este: <strong>%&lt;nr_parametru&gt;$&lt;tip_date&gt;</strong>, unde nr_parametru - este o valoare &gt; 0, reprezentand pozitia parametrului din metoda <strong>getString</strong> pe care Android il utilizeaza; tip_date - se poate afisa s(string), i(int), d(double). Exemplu: _&lt;string name=&quot;name_key&quot;&gt;Buna %1$s&lt;/string&gt;_</p></li><li><p><strong>getString</strong> -&gt; metoda pusa la dispozitie de pachetul core Android. Este utilizata pentru incarcarea unui text din strings.xml. Are doua implementari, prima accepta doar id-ul resursei din strings.xml, iar cea de a doua accepta, pe langa id-ul resurse si un numarul variabil de paramentri care reprezinta valorile variabilelor dinamice declarate in strings.xml. Mai multe detalii gasiti <a href=\"https://developer.android.com/guide/topics/resources/string-resource#formatting-strings\">aici</a></p></li></ul>",
+            "quizz": [
+                {
+                    "question": "Intrebarea 1 despre: Alert Dialog",
+                    "choices": [
+                        "Raspunsul 1 despre: Alert Dialog",
+                        "Raspunsul 2 despre: Alert Dialog",
+                        "Raspunsul 3 despre: Alert Dialog"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 2 despre: Alert Dialog",
+                    "choices": [
+                        "Raspunsul 1 despre: Alert Dialog",
+                        "Raspunsul 2 despre: Alert Dialog",
+                        "Raspunsul 3 despre: Alert Dialog"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 3 despre: Alert Dialog",
+                    "choices": [
+                        "Raspunsul 1 despre: Alert Dialog",
+                        "Raspunsul 2 despre: Alert Dialog",
+                        "Raspunsul 3 despre: Alert Dialog"
+                    ],
+                    "answerIndex": 1
+                }
+            ]
+        },
+        {
+            "about": {
+                "title": "Seminar11",
+                "author": "prof. Alexandru Dita",
+                "date": "12-12-2019"
+            },
+            "description": "Firebase Database",
+            "content": "<h3 id=\"informatii-aprofundate\">Informatii aprofundate</h3><ul><li><p><strong>FirebaseDatabase</strong>-&gt; clasa utilizata pentru realizarea unei conexiune intre aplicatia mobila si baza de date din Firebase. Obtinerea unei astfel de instante se face prin apelul urmator: <code>FirebaseDatabase.getInstance();</code></p></li><li><p><strong>DatabaseReference</strong> -&gt; este asemanatoarea cu @Dao din Room. Asigura conexiunea catre un nod parinte din baza de date. Prin intermediul acesti instante se realizeaza toate operatiile de tip CRUD din Firebase.</p></li><li><p><strong>getReference()</strong> -&gt; metoda disponibila la nivelul clasei <strong>FirebaseDatabase</strong>, avand rolul de a initializa un obiect de tipul <strong>DatabaseReference</strong>. Are un singur parametru de intrare de tip String care reprezinta numele nodului pe care se doreste a se efectua diverse operatii.</p></li><li><p><strong>push()</strong> -&gt; metoda disponibila la nivelul clasei <strong>DatabaseReference</strong>, avand rolul de a genera un nod nou si de a-l adauga in instanta de tip <strong>DatabaseReference</strong>(cunoscuta ca root). Prin intermediul acestei metoda se asigura efectuarea unei operatii asemanatoare cu insertul dintr-o baza de date ralationala.</p></li><li><p><strong>getKey()</strong> -&gt; metoda utilizata pentru preluarea valorii introduse intr-un root prin apelul in prealabil a metodei <strong>push()</strong></p></li><li><p><strong>setValue()</strong> -&gt; metoda utilizata pentru realizarea operatiei de tip update dintr-o baza de date relationala. Asigura trimiterea informatiilor intr-un nod. Deobicei este utilizata in combinatie cu apelul metodei <strong>child()</strong> pentru a adauga informatiile respective la nivelul unui nod generat prin intermediul metodei <strong>push()</strong>. Daca nu se realizeaza aceasta inlantuire, informatiile introduse prin apelul metodei <strong>setValue</strong> se vor adauga direct in nodul parinte. Aceasta metoda are un singur parametru de intrare de tip Object.</p></li><li><p><strong>getValue()</strong> -&gt; este inversul metodei <strong>setValue()</strong>, asigurand conversia de la un nod Firebase catre o instanta Java. Metoda apartine clasei <strong>DataSnapshot</strong> si are un singur parametru de intrare care reprezinta tipul obiectului Java(.class) in care se doreste deserializarea informatiilor. Clasa Java trebuie sa contina un constructor fara parametri, getter si setter. Metoda <strong>getValue</strong> se bazeaza pe reflaction pentru construirea obiectelor.</p></li><li><p><strong>removeValue()</strong> -&gt; este utilizata pentru stergerea unui nod. Cel mai des, aceasta este utilizata in combinatie cu <strong>child()</strong> astfel incat sa se asigure stergerea unui singur nod din root. Daca este apelata la nivelul root-ului atunci se vor sterge toate nodurile pe care acesta le are.</p></li><li><p><strong>child()</strong>-&gt; metoda disponibila la nivelul clasei <strong>DatabaseReference</strong>, asigurand returnarea unui nod din interiorul nodul parinte. Tipul nodului returnat este <strong>DatabaseReference</strong>. In Firebase apelul metodei <strong>child</strong> este echivalentul conditie <em>where id=&lt;value&gt;</em> din bazele de date relationale. Metoda are un singur parametru de intrare de tip String care reprezinta denumirea nodului.</p></li><li><p><strong>addValueEventListener()</strong> -&gt; disponobila la nivelul clasei <strong>DatabaseReference</strong>, asigurand notificarea aplicatiei mobile in momentul in care apar modificari(CRUD) asupra bazei de date din Firebase. Metoda se poate adauga la nivelul unui child sau la nivelul parintelui. Daca evenimentul este adaugat la nivelul parintelui, atunci orice modificare a unui copil este apelat acest eveniment. Daca <strong>addValueEventListener</strong> este atasat atat la nivelul parintelui cat si al unui copil, atunci cand asupra copilului este efectuata o modificare ambele evenimente se vor declansa. Prin urmare, se recomanda a se evita adaugarea acestui eveniment asupra nodurilor de tip copil daca este pus la nivelul parintelui.</p></li><li><p><strong>removeEventListener()</strong> -&gt; are aceleasi proprietati precum <strong>addValueEventListener</strong>, dar se declanseaza in momentul apelului metodei <strong>removeValue()</strong></p></li><li><p><strong>DataSnapshot</strong> -&gt; aceasta clasa este utilizata pentru realizarea conversie de la JSON-ul din Firebase la obiecte Java. Este preluat prin intermediul evenimentelor <strong>addValueEventListener</strong>, respectiv <strong>removeEventListener</strong></p></li></ul>",
+            "quizz": [
+                {
+                    "question": "Intrebarea 1 despre: Firebase Database",
+                    "choices": [
+                        "Raspunsul 1 despre: Firebase Database",
+                        "Raspunsul 2 despre: Firebase Database",
+                        "Raspunsul 3 despre: Firebase Database"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 2 despre: Firebase Database",
+                    "choices": [
+                        "Raspunsul 1 despre: Firebase Database",
+                        "Raspunsul 2 despre: Firebase Database",
+                        "Raspunsul 3 despre: Firebase Database"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 3 despre: Firebase Database",
+                    "choices": [
+                        "Raspunsul 1 despre: Firebase Database",
+                        "Raspunsul 2 despre: Firebase Database",
+                        "Raspunsul 3 despre: Firebase Database"
+                    ],
+                    "answerIndex": 1
+                }
+            ]
+        },
+        {
+            "about": {
+                "title": "Seminar12",
+                "author": "prof. Alexandru Dita",
+                "date": "20-12-2019"
+            },
+            "description": "Grafica",
+            "content": "<h3 id=\"informatii-aprofundate-\">Informatii aprofundate:</h3><ul><li><p><strong>onDraw</strong>-&gt; metoda ce apartine clasei View. Asigura desenarea componentelor vizuale pe ecranul dispozitivului mobil.<br>Este metoda suprascrisa in momentul in care se doreste definirea unei componente vizuale custom.</p></li><li><p><strong>canvas</strong> -&gt; obiect utilizat pentru desenarea graficelor. Este initializat prin clasa View, fiind parametru de intrare al metodei onDraw</p></li><li><p><strong>getHeight</strong> -&gt; metoda disponibila la nivelul clasei Canvas. Ofera informatii despre inaltimea dispozitivului mobil</p></li><li><p><strong>getWitdh</strong> -&gt; metoda disponibila la nivelul clasei Canvas. Ofera informatii despre latimea dispozitivului mobil</p></li><li><p><strong>Google Maps</strong> -&gt; puteti gasi mai multe informatii accesand urmatorul link <a href=\"https://developers.google.com/maps/documentation/android-sdk/start\">Google Maps Android Developer</a></p></li></ul>",
+            "quizz": [
+                {
+                    "question": "Intrebarea 1 despre: Grafica",
+                    "choices": [
+                        "Raspunsul 1 despre: Grafica",
+                        "Raspunsul 2 despre: Grafica",
+                        "Raspunsul 3 despre: Grafica"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 2 despre: Grafica",
+                    "choices": [
+                        "Raspunsul 1 despre: Grafica",
+                        "Raspunsul 2 despre: Grafica",
+                        "Raspunsul 3 despre: Grafica"
+                    ],
+                    "answerIndex": 1
+                },
+                {
+                    "question": "Intrebarea 3 despre: Grafica",
+                    "choices": [
+                        "Raspunsul 1 despre: Grafica",
+                        "Raspunsul 2 despre: Grafica",
+                        "Raspunsul 3 despre: Grafica"
+                    ],
+                    "answerIndex": 1
+                }
+            ]
+        }
+    ]
+}
