@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.os.Environment;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -228,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
 
             private void performSaveAsTxt() {
                 if (objectCourses != null && objectCourses.size()>0) {
-                    File fileFolder = new File(MainActivity.this.getFilesDir(), "rapoarte");
+                    File fileFolder = new File(MainActivity.this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "rapoarte_mobileLearningApp");
                     if (!fileFolder.exists())
                         fileFolder.mkdir();
                     try {
