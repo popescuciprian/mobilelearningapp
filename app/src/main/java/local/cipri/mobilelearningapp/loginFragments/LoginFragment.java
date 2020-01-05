@@ -52,15 +52,16 @@ public class LoginFragment extends Fragment {
         autoLogin();
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         initForm(view);
-        debugLogin();
+        //debugLogin();
         return view;
     }
 
     private void debugLogin() {
-        //todo: remove before sending, debug purpose only.
+        //todo: comment before sending, debug purpose only.
         try {
             etEmail.setText("debug@mla.com");
             etPassword.setText("123456");
+            btnLogin.performClick();
         } catch
         (Exception e) {
         }
