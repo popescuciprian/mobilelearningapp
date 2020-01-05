@@ -11,6 +11,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.os.Environment;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -94,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestPermision();
         setContentView(R.layout.activity_main);
         tvDate = findViewById(R.id.et_date_select_main);
         initListViews();
@@ -226,10 +226,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra(REQUIEST_KEY, QUIZZES_REQUEST_CODE);
                     startActivityForResult(intent, QUIZZES_REQUEST_CODE);
                 } else if (item.getItemId() == R.id.main_nav_save_rap) {
-                    if (ContextCompat.checkSelfPermission(getApplicationContext(),
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-                    )
-                        performSaveAsTxt();
+                    performSaveAsTxt();
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
@@ -237,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
 
             private void performSaveAsTxt() {
                 if (objectCourses != null && objectCourses.size() > 0) {
-                    File fileFolder = new File("/storage/emulated/0/Download","rapoarteMLA");
+                    File fileFolder = new File(MainActivity.this.getFilesDir(), "rapoarte");
                     if (!fileFolder.exists())
                         fileFolder.mkdir();
                     try {
